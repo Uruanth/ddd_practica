@@ -1,4 +1,6 @@
 package co.com.sofka.tejido.values;
 
-public class NombreQA {
+import java.io.Serializable;
+
+public class NombreQA  implements Serializable {
 }

@@ -13,4 +13,5 @@ public class SolicitudClienteId  extends Id {
     public static SolicitudClienteId of(String value) {
         return new SolicitudClienteId(value);
     }
+
 }

@@ -37,7 +37,7 @@ public class Diseño extends AggregateRoot<DiseñoId> {
         Objects.requireNonNull(contacto, "El atributo no puede ser null");
         Objects.requireNonNull(cedula, "El atributo no puede ser null");
         this.cliente.actualizarCliente(nombre, contacto, cedula);
-        //Evento cliente actualizado
+        //TODO: Evento cliente actualizado
     }
 
     public void generarSolicitud(String nombre, String caracteristicas, String materiales, String color, String tamanho, String observacion, String material){
@@ -50,7 +50,15 @@ public class Diseño extends AggregateRoot<DiseñoId> {
         Objects.requireNonNull(material, "El atributo no puede ser null");
         this.solicitudCliente.actualizarPrototipo(nombre, caracteristicas, materiales);
         this.solicitudCliente.actualizarCaracteristicasSolicitadas(color, tamanho, observacion, material);
-        //evento solicitud generada
+        //TODO: evento solicitud generada
     }
 
+
+    public SolicitudCliente solicitudCliente() {
+        return solicitudCliente;
+    }
+
+    public Cliente cliente() {
+        return cliente;
+    }
 }

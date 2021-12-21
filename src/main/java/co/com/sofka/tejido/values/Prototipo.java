@@ -1,6 +1,8 @@
 package co.com.sofka.tejido.values;
 
-public class Prototipo {
+import java.io.Serializable;
+
+public class Prototipo  implements Serializable {
 
     private final String nombre;
     private final String caracteristicas;
@@ -11,5 +13,38 @@ public class Prototipo {
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
         Materiales = materiales;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public String getMateriales() {
+        return Materiales;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Prototipo prototipo = (Prototipo) o;
+
+        if (nombre != null ? !nombre.equals(prototipo.nombre) : prototipo.nombre != null) return false;
+        if (caracteristicas != null ? !caracteristicas.equals(prototipo.caracteristicas) : prototipo.caracteristicas != null)
+            return false;
+        return Materiales != null ? Materiales.equals(prototipo.Materiales) : prototipo.Materiales == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nombre != null ? nombre.hashCode() : 0;
+        result = 31 * result + (caracteristicas != null ? caracteristicas.hashCode() : 0);
+        result = 31 * result + (Materiales != null ? Materiales.hashCode() : 0);
+        return result;
     }
 }

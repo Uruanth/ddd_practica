@@ -25,4 +25,12 @@ public class SolicitudCliente extends Entity<SolicitudClienteId> {
         this.caracteristicasSolicitadas = new CaracteristicasSolicitadas(color, tamanho, observacion, material);
     }
 
+
+    public CaracteristicasSolicitadas caracteristicasSolicitadas() {
+        return caracteristicasSolicitadas;
+    }
+
+    public Prototipo prototipo() {
+        return prototipo;
+    }
 }

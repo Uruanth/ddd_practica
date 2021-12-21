@@ -1,4 +1,6 @@
 package co.com.sofka.tejido.values;
 
-public class ResultadosPrueba {
+import java.io.Serializable;
+
+public class ResultadosPrueba  implements Serializable {
 }

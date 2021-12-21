@@ -19,4 +19,7 @@ public class Cliente extends Entity<ClienteId> {
         this.cliente = new DatosCliente(nombre, contacto, cedula);
     }
 
+    public DatosCliente datosCliente() {
+        return cliente;
+    }
 }
