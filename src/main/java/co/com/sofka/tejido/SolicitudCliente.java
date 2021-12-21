@@ -8,17 +8,17 @@ import co.com.sofka.tejido.values.SolicitudClienteId;
 public class SolicitudCliente extends Entity<SolicitudClienteId> {
 
     private CaracteristicasSolicitadas caracteristicasSolicitadas;
-    private Prototipo prootipo;
+    private Prototipo prototipo;
 
 
-    public SolicitudCliente(SolicitudClienteId id, CaracteristicasSolicitadas caracteristicasSolicitadas, Prototipo prootipo) {
+    public SolicitudCliente(SolicitudClienteId id, CaracteristicasSolicitadas caracteristicasSolicitadas, Prototipo prototipo) {
         super(id);
         this.caracteristicasSolicitadas = caracteristicasSolicitadas;
-        this.prootipo = prootipo;
+        this.prototipo = prototipo;
     }
 
     public void actualizarPrototipo(String nombre, String caracteristicas, String materiales){
-        this.prootipo = new Prototipo(nombre, caracteristicas, materiales);
+        this.prototipo = new Prototipo(nombre, caracteristicas, materiales);
     }
 
     public void actualizarCaracteristicasSolicitadas(String color, String tamanho, String observacion, String material){
