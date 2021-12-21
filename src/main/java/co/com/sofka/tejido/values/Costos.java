@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import java.io.Serializable;
+import co.com.sofka.domain.generic.ValueObject;
 
-public class Costos implements Serializable {
+
+public class Costos implements ValueObject<Double> {
 
     private final Double costos;
 
@@ -15,9 +16,6 @@ public class Costos implements Serializable {
         return new Costos(this.costos + valor);
     }
 
-    public Double getCostos() {
-        return costos;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -32,5 +30,10 @@ public class Costos implements Serializable {
     @Override
     public int hashCode() {
         return costos != null ? costos.hashCode() : 0;
+    }
+
+    @Override
+    public Double value() {
+        return costos;
     }
 }

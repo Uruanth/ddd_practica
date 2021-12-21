@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.Identity;
 
-public class FeedbackId extends Id {
+
+public class FeedbackId extends Identity {
 
     private FeedbackId(String value) {
         super(value);

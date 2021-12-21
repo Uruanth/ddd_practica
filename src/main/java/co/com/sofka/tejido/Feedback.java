@@ -1,6 +1,6 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.Entity;
+import co.com.sofka.domain.generic.Entity;
 import co.com.sofka.tejido.values.Comentarios;
 import co.com.sofka.tejido.values.FeedbackId;
 
@@ -18,7 +18,7 @@ public class Feedback extends Entity<FeedbackId> {
 
     public void asignarTipo(Boolean tipo){
         Objects.requireNonNull(tipo, "El atributo no puede ser null");
-        this.comentarios = new Comentarios(this.comentarios.getDetalles(), tipo);
+        this.comentarios = new Comentarios(this.comentarios.value().detalles(), tipo);
     }
 
     public void confirmarComentarios(){

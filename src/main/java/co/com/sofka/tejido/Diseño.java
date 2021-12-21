@@ -1,14 +1,13 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.AggregateRoot;
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.tejido.values.ClienteId;
 import co.com.sofka.tejido.values.DatosCliente;
 import co.com.sofka.tejido.values.DiseñoId;
 
 import java.util.Objects;
 
-public class Diseño extends AggregateRoot<DiseñoId> {
+public class Diseño extends AggregateEvent<DiseñoId> {
 
     private  SolicitudCliente solicitudCliente;
     private Cliente cliente;
@@ -19,7 +18,7 @@ public class Diseño extends AggregateRoot<DiseñoId> {
         this.cliente = cliente;
     }
 
-    public Diseño(Id id, SolicitudCliente solicitudClienteId) {
+    public Diseño(DiseñoId id, SolicitudCliente solicitudClienteId) {
         super(id);
         this.solicitudCliente = solicitudClienteId;
     }

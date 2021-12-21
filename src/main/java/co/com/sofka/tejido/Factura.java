@@ -1,6 +1,6 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.Entity;
+import co.com.sofka.domain.generic.Entity;
 import co.com.sofka.tejido.values.Costos;
 import co.com.sofka.tejido.values.DatosCliente;
 import co.com.sofka.tejido.values.FacturaId;
@@ -27,7 +27,7 @@ public class Factura extends Entity<FacturaId> {
     public void calcularCostos() {
         productos.stream()
                 .forEach(productos ->
-                        this.costos = this.costos.sumarValor(productos.getCosto()));
+                        this.costos = this.costos.sumarValor(productos.value().costo()));
 
     }
 

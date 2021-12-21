@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.Identity;
 
-public class ResponsableId extends Id {
+
+public class ResponsableId extends Identity {
     private ResponsableId(String  value) {
         super(value);
     }

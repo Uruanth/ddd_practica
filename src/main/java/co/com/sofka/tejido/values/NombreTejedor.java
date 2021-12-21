@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import java.io.Serializable;
+import co.com.sofka.domain.generic.ValueObject;
 
-public class NombreTejedor  implements Serializable {
+
+public class NombreTejedor  implements ValueObject<String> {
 
     private final String name;
 
@@ -11,6 +12,26 @@ public class NombreTejedor  implements Serializable {
     }
 
     public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NombreTejedor that = (NombreTejedor) o;
+
+        return name != null ? name.equals(that.name) : that.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    public String value() {
         return name;
     }
 }

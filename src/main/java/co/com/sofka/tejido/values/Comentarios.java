@@ -1,8 +1,10 @@
 package co.com.sofka.tejido.values;
 
+import co.com.sofka.domain.generic.ValueObject;
+
 import java.io.Serializable;
 
-public class Comentarios  implements Serializable {
+public class Comentarios  implements ValueObject<Comentarios.Properties> {
 
     private final String detalles;
     private final boolean TipoComentario;
@@ -12,13 +14,6 @@ public class Comentarios  implements Serializable {
         TipoComentario = tipoComentario;
     }
 
-    public String getDetalles() {
-        return detalles;
-    }
-
-    public boolean isTipoComentario() {
-        return TipoComentario;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -36,5 +31,25 @@ public class Comentarios  implements Serializable {
         int result = detalles != null ? detalles.hashCode() : 0;
         result = 31 * result + (TipoComentario ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public Properties value() {
+        return new Properties() {
+            @Override
+            public String detalles() {
+                return detalles;
+            }
+
+            @Override
+            public boolean TipoComentario() {
+                return TipoComentario;
+            }
+        };
+    }
+
+    public interface Properties {
+        String detalles();
+        boolean TipoComentario();
     }
 }

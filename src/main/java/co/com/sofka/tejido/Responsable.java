@@ -1,6 +1,6 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.Entity;
+import co.com.sofka.domain.generic.Entity;
 import co.com.sofka.tejido.values.NombreTejedor;
 import co.com.sofka.tejido.values.ProductoFinal;
 import co.com.sofka.tejido.values.ResponsableId;

@@ -1,8 +1,8 @@
 package co.com.sofka.tejido.values;
 
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.Identity;
 
-public class DiseñoId extends Id {
+public class DiseñoId extends Identity {
 
     private DiseñoId(String value) {
         super(value);

@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.Identity;
 
-public class FacturaId extends Id {
+
+public class FacturaId extends Identity {
 
     private FacturaId(String value){
         super(value);

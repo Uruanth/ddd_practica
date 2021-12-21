@@ -1,6 +1,6 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.Entity;
+import co.com.sofka.domain.generic.Entity;
 import co.com.sofka.tejido.values.CaracteristicasSolicitadas;
 import co.com.sofka.tejido.values.Prototipo;
 import co.com.sofka.tejido.values.SolicitudClienteId;

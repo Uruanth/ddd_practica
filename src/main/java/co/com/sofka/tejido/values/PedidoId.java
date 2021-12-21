@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.Identity;
 
-public class PedidoId extends Id {
+
+public class PedidoId extends Identity {
 
     private PedidoId(String value) {
         super(value);

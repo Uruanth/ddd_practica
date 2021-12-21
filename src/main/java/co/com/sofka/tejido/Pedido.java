@@ -1,14 +1,13 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.AggregateRoot;
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.tejido.values.*;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Pedido extends AggregateRoot<PedidoId> {
+public class Pedido extends AggregateEvent<PedidoId> {
 
     private DiseñoId diseñoId;
     private ProduccionId produccionId;
@@ -71,7 +70,7 @@ public class Pedido extends AggregateRoot<PedidoId> {
 
     public void calificarFeedbacks() {
         var feedsPositivos = this.feedback.stream()
-                .filter(feed -> feed.comentarios().isTipoComentario() == true)
+                .filter(feed -> feed.comentarios().value().TipoComentario() == true)
                 .collect(Collectors.toSet())
                 .size();
 

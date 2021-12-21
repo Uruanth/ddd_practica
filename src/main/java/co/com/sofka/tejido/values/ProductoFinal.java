@@ -1,8 +1,9 @@
 package co.com.sofka.tejido.values;
 
-import java.io.Serializable;
+import co.com.sofka.domain.generic.ValueObject;
 
-public class ProductoFinal  implements Serializable {
+
+public class ProductoFinal  implements ValueObject<ProductoFinal.Properties> {
     private final Double costo;
     private final String nombre;
     private final String caracteristicas;
@@ -33,15 +34,29 @@ public class ProductoFinal  implements Serializable {
         return result;
     }
 
-    public Double getCosto() {
-        return costo;
+    @Override
+    public Properties value() {
+        return new Properties() {
+            @Override
+            public Double costo() {
+                return costo;
+            }
+
+            @Override
+            public String nombre() {
+                return nombre;
+            }
+
+            @Override
+            public String caracteristicas() {
+                return caracteristicas;
+            }
+        };
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getCaracteristicas() {
-        return caracteristicas;
+    public interface Properties {
+        Double costo();
+        String nombre();
+        String caracteristicas();
     }
 }

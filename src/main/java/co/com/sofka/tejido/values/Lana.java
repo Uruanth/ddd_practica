@@ -1,8 +1,10 @@
 package co.com.sofka.tejido.values;
 
+import co.com.sofka.domain.generic.ValueObject;
+
 import java.io.Serializable;
 
-public class Lana  implements Serializable {
+public class Lana  implements ValueObject<Lana.Properties> {
 
     private  final String color;
     private  final String largo;
@@ -14,22 +16,6 @@ public class Lana  implements Serializable {
         this. largo = largo;
         this. referencia = referencia;
         this. tipo = tipo;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public String getLargo() {
-        return largo;
-    }
-
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public String getTipo() {
-        return tipo;
     }
 
     @Override
@@ -52,5 +38,37 @@ public class Lana  implements Serializable {
         result = 31 * result + (referencia != null ? referencia.hashCode() : 0);
         result = 31 * result + (tipo != null ? tipo.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public Properties value() {
+        return new Properties() {
+            @Override
+            public String color() {
+                return color;
+            }
+
+            @Override
+            public String largo() {
+                return largo;
+            }
+
+            @Override
+            public String referencia() {
+                return referencia;
+            }
+
+            @Override
+            public String tipo() {
+                return tipo;
+            }
+        };
+    }
+
+    public interface Properties {
+        String color();
+        String largo();
+        String referencia();
+        String tipo();
     }
 }

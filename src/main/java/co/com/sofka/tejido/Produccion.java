@@ -1,12 +1,11 @@
 package co.com.sofka.tejido;
 
-import co.com.sofka.generico.AggregateRoot;
-import co.com.sofka.generico.Id;
+import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.tejido.values.*;
 
 import java.util.Objects;
 
-public class Produccion extends AggregateRoot<ProduccionId> {
+public class Produccion extends AggregateEvent<ProduccionId> {
 
     private  Prototipo prototipo;
 
@@ -14,7 +13,7 @@ public class Produccion extends AggregateRoot<ProduccionId> {
     private Materiales materiales;
     private QAId qaId;
 
-    public Produccion(Id id, Prototipo prototipo, Responsable responsable, Materiales materiales, QAId qaId) {
+    public Produccion(ProduccionId id, Prototipo prototipo, Responsable responsable, Materiales materiales, QAId qaId) {
         super(id);
         this.prototipo = prototipo;
         this.responsable = responsable;

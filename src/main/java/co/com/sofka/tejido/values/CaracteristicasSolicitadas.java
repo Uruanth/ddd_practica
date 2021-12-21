@@ -1,9 +1,10 @@
 package co.com.sofka.tejido.values;
 
-import java.io.Serializable;
+import co.com.sofka.domain.generic.ValueObject;
+
 import java.util.Objects;
 
-public class CaracteristicasSolicitadas implements Serializable {
+public class CaracteristicasSolicitadas implements ValueObject<CaracteristicasSolicitadas.Properties> {
 
     private final String color;
     private final String tamanho;
@@ -18,22 +19,6 @@ public class CaracteristicasSolicitadas implements Serializable {
         this.material = Objects.requireNonNull(material);;
     }
 
-
-    public String getColor() {
-        return color;
-    }
-
-    public String getTamanho() {
-        return tamanho;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,5 +41,37 @@ public class CaracteristicasSolicitadas implements Serializable {
         result = 31 * result + (observaciones != null ? observaciones.hashCode() : 0);
         result = 31 * result + (material != null ? material.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public Properties value() {
+        return new Properties() {
+            @Override
+            public String color() {
+                return color;
+            }
+
+            @Override
+            public String tamanho() {
+                return tamanho;
+            }
+
+            @Override
+            public String observaciones() {
+                return observaciones;
+            }
+
+            @Override
+            public String material() {
+                return material;
+            }
+        };
+    }
+
+    public interface Properties{
+        String color();
+        String tamanho();
+        String observaciones();
+        String material();
     }
 }

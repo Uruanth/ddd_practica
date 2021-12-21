@@ -1,8 +1,10 @@
 package co.com.sofka.tejido.values;
 
+import co.com.sofka.domain.generic.ValueObject;
+
 import java.io.Serializable;
 
-public class Prototipo  implements Serializable {
+public class Prototipo  implements ValueObject<Prototipo.Properties> {
 
     private final String nombre;
     private final String caracteristicas;
@@ -46,5 +48,31 @@ public class Prototipo  implements Serializable {
         result = 31 * result + (caracteristicas != null ? caracteristicas.hashCode() : 0);
         result = 31 * result + (Materiales != null ? Materiales.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public Properties value() {
+        return new Properties() {
+            @Override
+            public String nombre() {
+                return nombre;
+            }
+
+            @Override
+            public String caracteristicas() {
+                return caracteristicas;
+            }
+
+            @Override
+            public String Materiales() {
+                return Materiales;
+            }
+        };
+    }
+
+    public interface Properties {
+        String nombre();
+        String caracteristicas();
+        String Materiales();
     }
 }

@@ -1,9 +1,10 @@
 package co.com.sofka.tejido.values;
 
-import java.io.Serializable;
+import co.com.sofka.domain.generic.ValueObject;
+
 import java.util.Objects;
 
-public class DatosCliente  implements Serializable {
+public class DatosCliente  implements ValueObject<DatosCliente.Properties> {
 
     private final String nombre;
     private final String contacto;
@@ -13,18 +14,6 @@ public class DatosCliente  implements Serializable {
         this.nombre = Objects.requireNonNull(nombre);
         this.contacto = Objects.requireNonNull(contacto);;
         this.cedula = Objects.requireNonNull(cedula);
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getContacto() {
-        return contacto;
-    }
-
-    public String getCedula() {
-        return cedula;
     }
 
     @Override
@@ -45,5 +34,31 @@ public class DatosCliente  implements Serializable {
         result = 31 * result + (contacto != null ? contacto.hashCode() : 0);
         result = 31 * result + (cedula != null ? cedula.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public Properties value() {
+        return new Properties() {
+            @Override
+            public String nombre() {
+                return nombre;
+            }
+
+            @Override
+            public String contacto() {
+                return contacto;
+            }
+
+            @Override
+            public String cedula() {
+                return cedula;
+            }
+        };
+    }
+
+    public interface Properties {
+        String nombre();
+        String contacto();
+        String cedula();
     }
 }
