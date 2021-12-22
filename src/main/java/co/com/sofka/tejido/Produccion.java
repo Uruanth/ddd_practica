@@ -1,64 +1,65 @@
 package co.com.sofka.tejido;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.tejido.eventos.*;
 import co.com.sofka.tejido.values.*;
 
 import java.util.Objects;
 
 public class Produccion extends AggregateEvent<ProduccionId> {
 
-    private  Prototipo prototipo;
-
-    private Responsable responsable;
-    private Materiales materiales;
-    private QAId qaId;
+    protected Prototipo prototipo;
+    protected Responsable responsable;
+    protected Materiales materiales;
+    protected QAId qaId;
 
     public Produccion(ProduccionId id, Prototipo prototipo, Responsable responsable, Materiales materiales, QAId qaId) {
         super(id);
-        this.prototipo = prototipo;
-        this.responsable = responsable;
-        this.materiales = materiales;
-        this.qaId = qaId;
+        subscribe(new ProduccionChange(this));
+        appendChange(new ProduccionAgregada(id, prototipo, responsable, materiales, qaId));
+
     }
 
-    public void asignarResponsable(ResponsableId id, NombreTejedor nombreTejedor, ProductoFinal productoFinal){
+    public Produccion(ProduccionId entityId) {
+        super(entityId);
+        subscribe(new ProduccionChange(this));
+    }
+
+    public void asignarResponsable(ResponsableId id, NombreTejedor nombreTejedor, ProductoFinal productoFinal) {
         Objects.requireNonNull(id, "id no puede ser nulo");
         Objects.requireNonNull(nombreTejedor, "nombreTejedor no puede ser nulo");
         Objects.requireNonNull(productoFinal, "Producto final no puede ser nulo");
-        this.responsable = new Responsable(id, nombreTejedor, productoFinal);
-        //todo: Evento de tejedorAsignado
+        appendChange(new ResponsableAsignado(id, nombreTejedor, productoFinal));
     }
 
-    public void asignarPrototipo(String nombre, String caracteristicas, String materiales){
+    public void asignarPrototipo(String nombre, String caracteristicas, String materiales) {
         Objects.requireNonNull(nombre, "Nombre del prototipo no puede ser nulo");
         Objects.requireNonNull(caracteristicas, "caracteristicas no puede ser nulo");
         Objects.requireNonNull(materiales, "materiales no puede ser nulo");
-        this.prototipo = new Prototipo(nombre, caracteristicas, materiales);
-        //todo: Evento prototipoActualizado
+        appendChange(new PrototipoAsignado(nombre, caracteristicas, materiales));
     }
 
-    public void actualizarResponsable(String nombreTejedor){
+    public void actualizarResponsable(String nombreTejedor) {
         Objects.requireNonNull(nombreTejedor, "El nombre del tejedor no puede ser nulo");
-        this.responsable.actualizarNombreTejedor(nombreTejedor);
-        //Todo: Evento nombreTejedorActualizado
+        appendChange(new NombreTejedorActualizado(nombreTejedor));
 
     }
 
-    public void asignarMateriales(MaterialesId id, Lana lana){
+    public void asignarMateriales(MaterialesId id, Lana lana) {
         Objects.requireNonNull(id, "id no puede ser nulo");
         Objects.requireNonNull(lana, "lana no puede ser nulo");
-        this.materiales = new Materiales(id, lana);
-        //todo: evento materialesAsignados
+        appendChange(new MaterialesAsignados(id, lana));
 
     }
 
-    public void confirmarPedido(){
-        //todo: evento de pedidoConfirmado
+    public void confirmarPedido() {
+        appendChange(new PedidoConfirmado(this.responsable().productoFinal()));
     }
 
-    public void asignarQA(QAId qaId){
+    public void asignarQA(QAId qaId) {
         Objects.requireNonNull(qaId, "El id no puede ser nulo");
         this.qaId = qaId;
+        appendChange(new QAAsignado(qaId));
     }
 
     public Prototipo prototipo() {

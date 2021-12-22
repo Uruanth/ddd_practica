@@ -1,6 +1,7 @@
 package co.com.sofka.tejido;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.tejido.eventos.*;
 import co.com.sofka.tejido.values.*;
 
 import java.util.Objects;
@@ -9,47 +10,47 @@ import java.util.stream.Collectors;
 
 public class Pedido extends AggregateEvent<PedidoId> {
 
-    private DiseñoId diseñoId;
-    private ProduccionId produccionId;
-    private Factura factura;
-    private Set<Feedback> feedback;
+    protected DisenhoId disenhoId;
+    protected ProduccionId produccionId;
+    protected Factura factura;
+    protected Set<Feedback> feedback;
 
-    public Pedido(PedidoId pedidoId, DiseñoId diseñoId, ProduccionId produccionId, Factura factura, Set<Feedback> feedback) {
+    public Pedido(PedidoId pedidoId, DisenhoId disenhoId, ProduccionId produccionId, Factura factura, Set<Feedback> feedback) {
         super(pedidoId);
-        this.diseñoId = diseñoId;
-        this.produccionId = produccionId;
-        this.factura = factura;
-        this.feedback = feedback;
+        subscribe(new PedidoChange(this));
+        appendChange(new PedidoCreado(disenhoId,produccionId,  factura,  feedback));
+
+    }
+
+    public Pedido(PedidoId entityId) {
+        super(entityId);
+        subscribe(new PedidoChange(this));
     }
 
     public void generarFactura(DatosCliente datosCliente) {
         var facturaId = new FacturaId();
         Objects.requireNonNull(datosCliente, "datosCliente no puede ser nulo");
-        this.factura = new Factura(facturaId, datosCliente);
-        //TODO: Evento factura creada
-    }
+        appendChange(new FacturaCreada(facturaId, datosCliente));
+     }
 
     public void agregarFeedbacks(String detalles, boolean tipoComentario) {
         var feedbackId = new FeedbackId();
         Objects.requireNonNull(feedbackId, "feedbackId no puede ser nulo");
         Objects.requireNonNull(tipoComentario, "tipoComentario no puede ser nulo");
         var comentarios = new Comentarios(detalles, tipoComentario);
-        this.feedback.add(new Feedback(feedbackId, comentarios));
-        //TODO: Evento feedback agregado
+        appendChange(new FeedbackAgregado(feedbackId, comentarios));
     }
 
     public void asignarProduccion(ProduccionId produccionId) {
         Objects.requireNonNull(produccionId, "La identificación de la producción no puede ser null");
-        this.produccionId = produccionId;
-        //TODO: Evento de producción asociada
+        appendChange(new ProduccionAsociada(produccionId));
     }
 
     public void agregarProducto(Double costo, String nombre, String caracteristicas) {
         Objects.requireNonNull(costo, "El costo no puede ser null");
         Objects.requireNonNull(nombre, "El nombre del producto no puede ser nulo");
         Objects.requireNonNull(caracteristicas, "Las caracteristicas no pueden ser nulas");
-        this.factura.agregarProducto(costo, nombre, caracteristicas);
-        //TODO: Evento de producto agregado
+        appendChange(new ProductoAgregado(costo, nombre, caracteristicas));
 
     }
 
@@ -57,38 +58,28 @@ public class Pedido extends AggregateEvent<PedidoId> {
         Objects.requireNonNull(nombre, "El nombre del factura no puede ser nulo");
         Objects.requireNonNull(contacto, "El contacto no puede ser nulo");
         Objects.requireNonNull(cedula, "La cedula no puede ser nula");
-        this.factura.actualizarCliente(nombre, contacto, cedula);
-        //TODO; evento factura actualizada
+        appendChange(new FacturaActualizada(nombre, contacto, cedula));
     }
 
-    public void asignarDiseño(DiseñoId diseñoId) {
-        Objects.requireNonNull(diseñoId, "El DiseñoId no puede ser nulo");
-        this.diseñoId = diseñoId;
-        //TODO: Diseño asignado
+    public void asignarDiseño(DisenhoId disenhoId) {
+        Objects.requireNonNull(disenhoId, "El DisenhoId no puede ser nulo");
+        appendChange(new DisenhoAsignado(disenhoId));
 
     }
 
     public void calificarFeedbacks() {
-        var feedsPositivos = this.feedback.stream()
-                .filter(feed -> feed.comentarios().value().TipoComentario() == true)
-                .collect(Collectors.toSet())
-                .size();
-
-        var balance = this.feedback.size() - feedsPositivos;
-        if (balance < 0) System.out.println("Balance negativo");
-        System.out.println("Balance Positivo");
-        //Todo: Evento de feedbacks calificados
+        appendChange(new FeedbacksCalificados(feedback));
 
     }
 
     public void cancelarPedido(PedidoId pedidoId){
         Objects.requireNonNull(pedidoId, "El pedidoId no puede ser nulo");
-        //Todo: Evento pedido cancelado
+        appendChange(new PedidoCancelado(pedidoId));
 
     }
 
-    public DiseñoId diseñoId() {
-        return diseñoId;
+    public DisenhoId diseñoId() {
+        return disenhoId;
     }
 
     public ProduccionId produccionId() {

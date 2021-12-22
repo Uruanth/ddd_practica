@@ -33,5 +33,11 @@ public class Responsable extends Entity<ResponsableId> {
         //todo: Evento nombreTejedorActualizado
     }
 
+    public NombreTejedor nombreTejedor() {
+        return nombreTejedor;
+    }
 
+    public ProductoFinal productoFinal() {
+        return productoFinal;
+    }
 }
