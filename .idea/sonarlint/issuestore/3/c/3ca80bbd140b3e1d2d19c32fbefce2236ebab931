@@ -1,0 +1,20 @@
+
+B
+java:S1602",Remove useless curly braces around statement(®Ş²°
+B
+java:S1602",Remove useless curly braces around statement(«èé”
+G
+java:S1602",Remove useless curly braces around statement(ã£ò‘úÿÿÿÿ
+B
+java:S1602#",Remove useless curly braces around statement(ŞÀŸ
+G
+java:S1602*",Remove useless curly braces around statement(ÒÖü…ÿÿÿÿÿ
+G
+java:S16022",Remove useless curly braces around statement(ÇÂÔÁùÿÿÿÿ
+B
+java:S11259"'Remove the unnecessary boolean literal.(×ışµûÿÿÿÿ
+N	java:S106>"9Replace this use of System.out or System.err by a logger.(Ç•Òñ
+S	java:S106?"9Replace this use of System.out or System.err by a logger.(Ïëı†üÿÿÿÿ
+B
+java:S1602B",Remove useless curly braces around statement(¡† ı
+S	java:S106C"9Replace this use of System.out or System.err by a logger.(ò¨Àüÿÿÿÿ

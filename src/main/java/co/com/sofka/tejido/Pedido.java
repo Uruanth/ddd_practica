@@ -6,7 +6,6 @@ import co.com.sofka.tejido.values.*;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Pedido extends AggregateEvent<PedidoId> {
 
